@@ -67,3 +67,8 @@ alter table students rename column name to first_name;
 
 -- rename table
 rename table students to swimming_students;
+
+-- create reservations table
+create table reservations(
+    reservation_id int unsigned auto_increment primary key;
+)
