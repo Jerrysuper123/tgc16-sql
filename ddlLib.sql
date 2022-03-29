@@ -121,10 +121,12 @@ create table writingCredits(
     writingCredit_id int unsigned auto_increment primary key
 ) engine=innodb;
 
-alter table writingCredits add column author_id int unsigned, add column book_id MEDIUMINT unsigned;
+alter table writingCredits add column author_id int unsigned, add column book_id int unsigned;
 
-alter table loans add constraint FK_loans_copies
-    foreign key(copy_id) references copies(copy_id);
+alter table writingCredits add constraint FK_writingCredits_authors
+    foreign key(author_id) references authors(author_id);
 
-alter table loans add constraint FK_loans_members
-    foreign key(member_id) references members(member_id);
+alter table writingCredits add constraint FK_writingCredits_books
+    foreign key(book_id) references books(book_id);
+
+insert into writingCredits (author_id, book_id) values (1, 1);
