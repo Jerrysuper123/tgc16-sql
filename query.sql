@@ -52,3 +52,11 @@ select firstName, employees.OfficeCode
     ORDER BY firstName;
 
 -- the above is inner join, there also left and right join (keep the same rows as original left and right table)
+-- inner join only produce 23 rows where there is ONLY a match
+select count(*) from employees join offices
+ON employees.officeCode = offices.officeCode
+
+-- left join product the same number of rows of left table customers
+-- comprehensive report of customers is produced
+select count(*) from customers LEFT join employees
+ON customers.salesRepEmployeeNumber = employees.employeeNumber
