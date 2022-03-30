@@ -104,3 +104,17 @@ having count(*)>=28
 -- step 6, 7 -- order and limit
 order by count(*) desc
 limit 10;
+
+-- SUB QUERIES
+ -- ex:1 find all customers whose credit limit above the average
+ select * from customers where creditLimit > (select avg(creditLimit) from customers);
+
+-- filter product code is not in the distinct product code
+select * from products 
+where productCode not in (select distinct(productCode) from orderdetails)
+
+
+ -- ex:3 use a subquery to find all customers with no sales rep employee number
+ select * from customers where customerNumber NOT IN (
+select customerNumber from customers where salesRepEmployeeNumber IS NOT NULL);
+
