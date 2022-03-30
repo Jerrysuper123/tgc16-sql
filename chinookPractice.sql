@@ -39,7 +39,7 @@ select CustomerId, avg(Total), BillingCountry from Invoice
     group by CustomerId
     ;
 
-select CustomerId, count(*), BillingCountry from Invoice
+select CustomerId, sum(Total), BillingCountry from Invoice
     where BillingCountry = "Germany"
     group by CustomerId
     ;
@@ -56,8 +56,21 @@ select Track.AlbumId, Title, avg(Milliseconds) from Track
     group by AlbumId, Title
     ;
 
+-- below is hardcoded 2
 select Track.AlbumId, Title, avg(Milliseconds) from Track
     join Album on Track.AlbumId = Album.AlbumId
     where Track.GenreId=2
     group by AlbumId, Title
     ;
+
+-- 3 way join
+select avg(Milliseconds), Genre.Name, Album.Title from Track join Album on Track.AlbumId = Album.AlbumId
+ join Genre on Track.GenreId = Genre.GenreId
+ where Genre.Name = "Jazz"
+ group by Genre.Name, Album.Title;
+
+-- short cut alias - caution against using it
+ select avg(Milliseconds), g.Name, a.Title from Track as t join Album as a on t.AlbumId = a.AlbumId
+ join Genre as g on t.GenreId = g.GenreId
+ where g.Name = "Jazz"
+ group by g.Name, a.Title;
