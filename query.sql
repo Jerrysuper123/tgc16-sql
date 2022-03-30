@@ -60,3 +60,47 @@ ON employees.officeCode = offices.officeCode
 -- comprehensive report of customers is produced
 select count(*) from customers LEFT join employees
 ON customers.salesRepEmployeeNumber = employees.employeeNumber
+
+
+-- aggregate functions
+
+select AVG(creditLimit) FROM customers;
+select MAX(creditLimit) FROM customers;
+
+select min(creditLimit) from customers
+where creditLimit>0
+
+-- select filter dates
+select * from payments where paymentDate > "2004-04-01"
+
+-- you can take out year, month and day
+select year(paymentDate), Month(paymentDate), day(paymentDate), amount from payments;
+
+-- find total amount for the month of june across all years
+select sum(amount) from payments where month(paymentDate)=6;
+
+-- group by happen before select
+-- columns are always selected last
+-- where and group by operates first
+-- you can only select what have grouped,
+select officeCode, count(*) from employees group by officeCode
+
+
+
+-- step 4 - select columns (-- must select same columns as group by columns)
+select products.productCode, productName, count(*) 
+-- step 1 - from join
+from orderdetails
+join products on products.productCode = orderdetails.productCOde
+-- step 2 - where to filter rows
+where productLine = "Classic Cars"
+-- step 3 - group by 
+group by productCode, productName
+
+-- step 5 - having
+
+having count(*)>=28
+
+-- step 6, 7 -- order and limit
+order by count(*) desc
+limit 10;
