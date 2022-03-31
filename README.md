@@ -22,6 +22,11 @@ mysql -u root -p
 create database swimming_school;
 ```
 
+## show database
+```
+show databases;
+```
+
 ## check databases
 select DATABASE();
 
