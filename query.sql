@@ -156,7 +156,5 @@ SELECT productCode, customerNumber FROM orders JOIN orderdetails
  group by customerNumber, productCode
  order by sum(quantityOrdered) DESC
  limit 1
-  
-  
- )
+)
  
